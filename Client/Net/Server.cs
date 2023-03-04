@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.Net.IO;
+using System;
 using System.Net.Sockets;
 
 namespace Client.Net
@@ -17,6 +18,10 @@ namespace Client.Net
             if(!_client.Connected)
             {
                 _client.Connect("127.0.0.1", 8080);
+                var connectPacket = new PacketBuilder();
+                connectPacket.WriteOpCode(0);
+                connectPacket.WriteString(username);
+                _client.Client.Send(connectPacket.GetPacketBytes());
             }
         }
     }
