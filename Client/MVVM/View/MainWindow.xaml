@@ -6,17 +6,45 @@
         xmlns:local="clr-namespace:Client"
         xmlns:viewmodel="clr-namespace:Client.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="474" Width="816">
+        Background="#36393F"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        Title="MainWindow" Height="650" Width="1200">
     <Window.DataContext>
         <viewmodel:MainViewModel />
     </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <DockPanel>
+        <Border Grid.ColumnSpan="2" Background="#252525"
+                MouseDown="Border_MouseDown">
+            <Grid HorizontalAlignment="Stretch">
+                <Label Content="Chat Application" Foreground="Gray" FontWeight="SemiBold" />
+
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <Button Width="20" Height="20" Content="🗕" Background="Transparent" BorderThickness="0"
+                            Foreground="Gray" FontWeight="Bold" Margin="0, 0, 0, 3"
+                            Click="ButtonMinimize_Click"/>
+                    <Button Width="20" Height="20" Content="🗖" Background="Transparent" BorderThickness="0"
+                            Foreground="Gray" FontWeight="Bold"
+                            Click="ButtonMaximize_Click"/>
+                    <Button Width="20" Height="20" Content="X" Background="Transparent" BorderThickness="0"
+                            Foreground="Gray" FontWeight="Bold"
+                            Click="CloseButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!--<DockPanel>
             <TextBox Height="25" DockPanel.Dock="Top" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Height="25" DockPanel.Dock="Top" Content="Connect" 
                     Command="{Binding ConnectToServerCommand}"/>
@@ -35,7 +63,7 @@
                 <TextBox Height="55" Width="545" VerticalContentAlignment="Center" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Width="55" Content="Send" Command="{Binding SendMessageCommand}"/>
             </StackPanel> 
-        </StackPanel>
+        </StackPanel>-->
         
     </Grid>
 </Window>
