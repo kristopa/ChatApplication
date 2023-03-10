@@ -7,15 +7,41 @@ using System.Windows;
 
 namespace Client.MVVM.ViewModel
 {
-    internal class MainViewModel
+    internal class MainViewModel : ObservableObject
     {
         public ObservableCollection<UserModel> Users { get; set; }
         public ObservableCollection<string> Messages { get; set; }
+        public ObservableCollection<ContactModel> Contacts { get; set; }
         public RelayCommand ConnectToServerCommand { get; set; }
         public RelayCommand SendMessageCommand { get; set; }
         public string Username { get; set; }
-        public string Message { get; set; }
+        //public string Message { get; set; }
         private Server _server;
+
+        private string _message;
+
+        public string Message 
+        { 
+            get { return _message; }
+            set
+            {
+                _message = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ContactModel _selectedContact;
+
+        public ContactModel SelectedContact
+        {
+            get { return _selectedContact; }
+            set 
+            { 
+                _selectedContact = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public MainViewModel()
         {
